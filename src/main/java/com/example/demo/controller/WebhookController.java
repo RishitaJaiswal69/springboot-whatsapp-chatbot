@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class WebhookController {
 
     // Your verify token - must match exactly what you enter in Meta portal
-    private static final String VERIFY_TOKEN = "webhook_token";
+    private static final String VERIFY_TOKEN= "VERIFY_TOKEN";
 
     
     @GetMapping("/webhook")
