@@ -1,0 +1,83 @@
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Navigation Chatbot</title>
+  <style>
+    
+    body { font-family: Arial; padding: 20px;
+        background: linear-gradient(
+        to bottom,
+        #ff7e5f,  /* Top color (e.g., coral) */
+        #feb47b,  /* Middle color (e.g., orange) */
+        #86a8e7   /* Bottom color (e.g., blue) */
+      ); 
+      
+      margin: 0;
+      height: 100vh; /* Full viewport height */
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      
+      }
+    input, button { margin: 5px; padding: 5px; }
+    .message { border: 1px solid #ccc; padding: 8px; margin: 4px 0; }
+    .sender { font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h2>Navigation Chatbot</h2>
+  
+  <input type="text" id="to" placeholder="Phone Number" />
+  <input type="text" id="message" placeholder="Message" />
+  <button onclick="sendMessage()">Send</button>
+  <button onclick="loadMessages()">Load Messages</button>
+
+  <p id="status"></p>
+
+  <div id="messages"></div>
+
+  <script>
+    function sendMessage() {
+      const to = document.getElementById('to').value;
+      const message = document.getElementById('message').value;
+
+      fetch('/api/whatsapp/send?to=' + encodeURIComponent(to) + '&message=' + encodeURIComponent(message), {
+        method: 'POST'
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('status').innerText = data;
+        loadMessages(); // Refresh messages after sending
+      });
+    }
+    </script>
+    <!--
+    function loadMessages() {
+        fetch('/api/whatsapp/messages')
+          .then(response => response.json())
+          .then(data => {
+            const container = document.getElementById('messages');
+            container.innerHTML = ''; // Clear old messages
+
+            data.sort((a, b) => a.timestamp - b.timestamp); // Sort by timestamp
+
+            data.forEach(msg => {
+              const div = document.createElement('div');
+              div.className = 'message';
+              div.innerHTML = `<span class="sender">${msg.sender}</span>: ${msg.text} 
+              <br/><small>${new Date(msg.timestamp).toLocaleString()}</small>`;
+              
+              container.appendChild(div);
+            });
+          });
+      }
+
+      // Load messages on page load
+      window.onload = loadMessages; -->
+      
+  </body>
+  </html>
+  
