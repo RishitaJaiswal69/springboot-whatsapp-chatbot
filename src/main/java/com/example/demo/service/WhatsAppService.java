@@ -19,7 +19,7 @@ public class WhatsAppService {
 
     private static final String WHATSAPP_API_URL = "https://graph.facebook.com/v19.0/{phone_number_id}/messages";
     
-    private static final String PHONE_NUMBER_ID = "PHONE_NUM_ID";
+    private static final String PHONE_NUMBER_ID = "PHONE_NUMBER_ID";
 
     private final RestTemplate restTemplate;
     private final MessageRepository messageRepository;
