@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class WebhookController {
 
     // Your verify token - must match exactly what you enter in Meta portal
-    private static final String VERIFY_TOKEN= System.getenv("VERIFY_TOKEN");
+    private static final String Verify_Token= System.getenv("VERIFY_TOKEN");
 
     
     @GetMapping("/webhook")
@@ -18,7 +18,7 @@ public class WebhookController {
             @RequestParam(name = "hub.verify_token") String token,
             @RequestParam(name = "hub.challenge") String challenge
     ) {
-        if ("subscribe".equals(mode) && VERIFY_TOKEN.equals(token)) {
+        if ("subscribe".equals(mode) && Verify_Token.equals(token)) {
             // Verification successful - return the challenge
             return ResponseEntity.ok(challenge);
         } else {
